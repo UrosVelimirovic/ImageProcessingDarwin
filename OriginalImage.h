@@ -15,6 +15,7 @@ public:
 		loadImage();
 		makeGrayscale();
 	}
+
 	~OriginalImage();
 
 private:

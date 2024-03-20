@@ -130,11 +130,14 @@
     <ClCompile Include="GreyScaleImage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OriginalImage.cpp" />
+    <ClCompile Include="STBShell.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GreyScaleImage.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="OriginalImage.h" />
+    <ClInclude Include="SobelImage.h" />
+    <ClInclude Include="STBShell.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="stb_image_write.h" />
   </ItemGroup>

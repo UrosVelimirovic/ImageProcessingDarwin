@@ -1,22 +1,19 @@
-#ifndef GREYSCALEIMAGE_H
-#define GREYSCALEIMAGE_H
+#ifndef SOBELIMAGE_H
+#define SOBELIMAGE_H
 
 #include "Image.h"
-#include "SobelImage.h"
 
-class GreyScaleImage: public Image {
-private:
-	SobelImage sobelImage;
+class SobelImage : public Image {
 public:
 	void startProcessing() override {
-		makeSobel();
+		
 	}
 
 	void setWidth(int width) {
 		this->width = width;
 	}
 	void setHeight(int height) {
-		this->height = height;
+		this->height = width;
 	}
 	void setChannels(int channels) {
 		this->channels = channels;
@@ -27,8 +24,7 @@ public:
 	void setImagePath(string path) {
 		this->imagePath = path;
 	}
-
 private:
-	void makeSobel();
+
 };
-#endif GREYSCALEIMAGE_H
+#endif SOBELIMAGE_H
