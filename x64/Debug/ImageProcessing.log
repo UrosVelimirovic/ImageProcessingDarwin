@@ -1,2 +1,5 @@
 ﻿  OriginalImage.cpp
+C:\Users\uros1\source\repos\ImageProcessing\ImageProcessing\OriginalImage.cpp(8,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+C:\Users\uros1\source\repos\ImageProcessing\ImageProcessing\OriginalImage.cpp(8,1): message : '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+C:\Users\uros1\source\repos\ImageProcessing\ImageProcessing\OriginalImage.cpp(53,48): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   ImageProcessing.vcxproj -> C:\Users\uros1\source\repos\ImageProcessing\x64\Debug\ImageProcessing.exe

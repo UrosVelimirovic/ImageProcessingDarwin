@@ -1,4 +1,3 @@
-
 #include "OriginalImage.h"
 
 int main() {

@@ -1,17 +1,20 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-
+#include <iostream>
+using namespace std;
 
 class Image {
-
-public:
+protected:
+	string imagePath;
 	int width;
 	int height;
 	int channels;
-	unsigned char* image_data;
-	string imagePath;
+	unsigned char* imageData;
+	
+public:
 
+	// Making the class abstract
 	virtual void startProcessing() = 0;
 };
 
