@@ -9,7 +9,7 @@ void SobelImage::makeMergedImage()
     int size = width * height;
     double alphaFactor = 0.5; // [0-1] depending on the transparency required
 
-    // Traversing through pixels
+    // Traversing through pixels and using alpha blending method for overlaying images.
     for (int i = 0; i < size; i++) {
         int index = i * channels;
         unsigned char red = originalImage[index];
@@ -21,17 +21,16 @@ void SobelImage::makeMergedImage()
         newMergedImage[index + 2] = static_cast<unsigned char>((imageData[i] * alphaFactor) + (blue * (1 - alphaFactor))); // blue
 
         if (channels > 3) {
-            newMergedImage[index + 3] = originalImage[index + 3]; // alpha
+            newMergedImage[index + 3] = originalImage[index + 3]; // alpha channel
         }
     }
 
     // making a new image
     STBShell::makeImage("out_merged.png", width, height, channels, newMergedImage, width * channels);
 
-    // std had to be provided since intrin.h also has an object cout
-    std::cout << "Merged image done! Image name: out_merged.png " << endl << endl;
+    cout << "Merged image done! Image name: out_merged.png " << endl << endl;
 
-    // making the new path for sobel image
+    // making the new path for Merged image
     string newPath;
     int slashOrBeginning = imagePath.size() - 1;
     for (; slashOrBeginning >= 0; slashOrBeginning--) {
@@ -44,7 +43,7 @@ void SobelImage::makeMergedImage()
     }
     else newPath = imagePath.substr(0, slashOrBeginning + 1) + "out_merged.png";
 
-    // setting sobel image
+    // setting merged image
     mergedImage.setChannels(channels);
     mergedImage.setHeight(height);
     mergedImage.setWidth(width);

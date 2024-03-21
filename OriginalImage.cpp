@@ -15,12 +15,13 @@ void OriginalImage::loadImage()
 		cin >> imagePath;
 
 		imageData = STBShell::loadImage(imagePath.c_str(), &this->width, &this->height, &this->channels, 0);
-   
+        
 		// check if the image wasn't loaded correctly
 		if (!imageData) {
 			cout << "Error: Wrong file PATH!" << endl;
 		}
 	} while (!imageData);
+    cout << endl;
 }
 
 void OriginalImage::makeGrayscale()
@@ -28,7 +29,7 @@ void OriginalImage::makeGrayscale()
     unsigned char* newGrayScaleImageData = new unsigned char[width * height];
     int size = width * height;
 
-    // Traversing through pixels
+    // Traversing through pixels and using luminosity method
     for (int i = 0; i < size; i++) {
         int index = i * channels;
         unsigned char red = imageData[index];
