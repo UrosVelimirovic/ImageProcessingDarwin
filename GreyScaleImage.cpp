@@ -1,7 +1,6 @@
 #include "GreyscaleImage.h"
 #include <math.h>
 #include "STBShell.h"
-#include <intrin.h>
 
 GreyScaleImage::~GreyScaleImage()
 {
@@ -59,8 +58,8 @@ void GreyScaleImage::makeSobel()
     // making a new image
     STBShell::makeImage("out_sobel.png", width, height, 1, newSobelImageData, width);
 
-    // std had to be provided since intrin.h also has an object cout
-    std::cout << "Sobel done! Image name: out_sobel.png " << endl;
+    
+    cout << "Sobel done! Image name: out_sobel.png " << endl;
 
     // making the new path for sobel image
     string newPath;
@@ -81,5 +80,8 @@ void GreyScaleImage::makeSobel()
     sobelImage.setWidth(width);
     sobelImage.setImageData(newSobelImageData);
     sobelImage.setImagePath(newPath);
+    sobelImage.setfirstOriginalImage(this->firstOriginalImage);
+
+    sobelImage.startProcessing();
 }
 

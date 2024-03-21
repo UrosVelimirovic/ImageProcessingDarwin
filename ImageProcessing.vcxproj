@@ -129,7 +129,9 @@
   <ItemGroup>
     <ClCompile Include="GreyScaleImage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MergedImage.cpp" />
     <ClCompile Include="OriginalImage.cpp" />
+    <ClCompile Include="SobelImage.cpp" />
     <ClCompile Include="STBShell.cpp" />
   </ItemGroup>
   <ItemGroup>

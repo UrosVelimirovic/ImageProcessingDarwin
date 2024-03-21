@@ -27,6 +27,12 @@
     <ClCompile Include="STBShell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SobelImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MergedImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OriginalImage.h">

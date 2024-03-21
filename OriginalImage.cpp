@@ -15,7 +15,7 @@ void OriginalImage::loadImage()
 		cin >> imagePath;
 
 		imageData = STBShell::loadImage(imagePath.c_str(), &this->width, &this->height, &this->channels, 0);
-
+   
 		// check if the image wasn't loaded correctly
 		if (!imageData) {
 			cout << "Error: Wrong file PATH!" << endl;
@@ -41,7 +41,7 @@ void OriginalImage::makeGrayscale()
 
     // making a new image
     STBShell::makeImage("out_grayscale.png", width, height, 1, newGrayScaleImageData, width);
-    
+   
     cout << "Greyscale done! Image name: out_grayscale.png " << endl;
 
     // making the new path for greyScale image
@@ -63,7 +63,7 @@ void OriginalImage::makeGrayscale()
     greyScaleImage.setWidth(width);
     greyScaleImage.setImageData(newGrayScaleImageData);
     greyScaleImage.setImagePath(newPath);
-
+    greyScaleImage.setfirstOriginalImage(this);
     // start sobel
     greyScaleImage.startProcessing();
 }

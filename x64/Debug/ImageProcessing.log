@@ -1,8 +1,3 @@
-﻿  GreyScaleImage.cpp
-C:\Users\uros1\source\repos\ImageProcessing\ImageProcessing\GreyScaleImage.cpp(62,65): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\uros1\source\repos\ImageProcessing\ImageProcessing\GreyScaleImage.cpp(75,48): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  OriginalImage.cpp
-C:\Users\uros1\source\repos\ImageProcessing\ImageProcessing\OriginalImage.cpp(49,48): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  main.cpp
-  Generating Code...
+﻿  SobelImage.cpp
+C:\Users\uros1\source\repos\ImageProcessing\ImageProcessing\SobelImage.cpp(36,48): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   ImageProcessing.vcxproj -> C:\Users\uros1\source\repos\ImageProcessing\x64\Debug\ImageProcessing.exe
