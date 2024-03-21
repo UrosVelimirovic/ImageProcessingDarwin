@@ -1,45 +1,66 @@
 #include "GreyscaleImage.h"
 #include <math.h>
 #include "STBShell.h"
+#include <intrin.h>
 
+GreyScaleImage::~GreyScaleImage()
+{
+    STBShell::deleteImageData(imageData);
+}
 
 void GreyScaleImage::makeSobel()
 {
-    int GX[] = { -1, 0, 1, -2, 0, 2, -1, 0, 1 };
-    int GY[] = { -1, -2, -1, 0, 0, 0, 1, 2, 1 };
     unsigned char* newSobelImageData = new unsigned char[width * height];
    
     int rows = height;
     int columns = width;
-    for (int row = 1; row < (rows - 1); row++) {
-        for (int column = 1; column < (columns - 1); column++) {
-            double gx = 0;
-            double gy = 0;
 
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
-                    int image_row = row + i - 1;
-                    int image_column = column + j - 1;
+    // Cache line size on most x86_64 cpus is 64 bytes.
+    // Therefore for optimization of sobel algorithm we will use this
+    // parameter. Of course, code can be adjusted so that it fits
+    // some other machines. We will use x86_64 architecture info since this 
+    // architecture is the most common
+    int cacheLineSize = 64;
 
-                    double image_value = imageData[image_row * columns + image_column];
+    // Using "Reduce Miss rate by blocking" technique for optimization:
+    // The algorithm is a simple sobel convolution algorihtm just adjusted to
+    // run faster. The main problem with the basic algorithm is that if the matrix is big enough
+    // it will store certain rows in cache and later remove them from cache to insert some others.
+    // As processing is going, old removed rows will have to be inserted into cache again because
+    // they will be processed again for new pixels beneath them. So the solution is instead of going
+    // to the end of the matrix row, we will divide the matrix into blocks so that each block contains
+    // three rows of certain size + one row from output image matrix. The size of these rows will be calculated
+    // as to fit cache the best so that we minimize the miss penalties in cache. This ultimately makes the program
+    // run faster. For more details consult the apropriate literature.
 
-                    int kernel_index = i * 3 + j;
+    // Most iner for loop has no two for loops which is expected. We simply unrolled them since they 
+    // always have the constant number of iterations. Just a small optimization.
 
-                    gx += image_value * GX[kernel_index];
-                    gy += image_value * GY[kernel_index];
-                }
+    for ( int block = 0; block < columns / cacheLineSize; block++) {
+        for ( int row = 1; row < rows - 1; row++) {
+            for ( int column = block * cacheLineSize; column < columns - 1 && column < (block + 1) * cacheLineSize; column++) {
+                const double gx = -1 * imageData[(row - 1) * columns + (column - 1)] +
+                    1 * imageData[(row - 1) * columns + (column + 1)] +
+                    -2 * imageData[(row - 0) * columns + (column - 1)] +
+                    2 * imageData[(row - 0) * columns + (column + 1)] +
+                    -1 * imageData[(row + 1) * columns + (column - 1)] +
+                    1 * imageData[(row + 1) * columns + (column + 1)];
+                const double gy = -1 * imageData[(row - 1) * columns + (column - 1)] +
+                    -2 * imageData[(row - 1) * columns + (column - 0)] +
+                    -1 * imageData[(row - 1) * columns + (column + 1)] +
+                    1 * imageData[(row + 1) * columns + (column - 1)] +
+                    2 * imageData[(row + 1) * columns + (column - 0)] +
+                    1 * imageData[(row + 1) * columns + (column + 1)];
+                newSobelImageData[row * columns + column] = sqrt(gx * gx + gy * gy);
             }
-
-            int magnitudeValue = sqrt(gx * gx + gy * gy);
-            magnitudeValue = min(255, max(0, magnitudeValue));
-            newSobelImageData[row * columns + column] = static_cast<unsigned char>(magnitudeValue);
         }
     }
 
     // making a new image
     STBShell::makeImage("out_sobel.png", width, height, 1, newSobelImageData, width);
 
-    cout << "Sobel done! Image name: out_sobel.png " << endl;
+    // std had to be provided since intrin.h also has an object cout
+    std::cout << "Sobel done! Image name: out_sobel.png " << endl;
 
     // making the new path for sobel image
     string newPath;
@@ -61,3 +82,4 @@ void GreyScaleImage::makeSobel()
     sobelImage.setImageData(newSobelImageData);
     sobelImage.setImagePath(newPath);
 }
+

@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClInclude Include="GreyScaleImage.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="MergedImage.h" />
     <ClInclude Include="OriginalImage.h" />
     <ClInclude Include="SobelImage.h" />
     <ClInclude Include="STBShell.h" />

@@ -27,7 +27,7 @@ public:
 	void setImagePath(string path) {
 		this->imagePath = path;
 	}
-
+	~GreyScaleImage();
 private:
 	void makeSobel();
 };
