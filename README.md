@@ -2,7 +2,7 @@
 
 # Build:
 
-Project was developed in visual studio 22. Big part of the project is included in the github repository for simplicity reasons. 
+Project was developed in visual studio 22.
 
 All you need to do is copy and paste all .h and .cpp files into a new empty project and run it.
 
